@@ -16,11 +16,12 @@ public class MovementDto {
     private Double commissionAmount;
     private String idBankAccountTransfer;
     private String idTransfer;
+    private LocalDateTime createdAt;
 
     public MovementDto() {
         this.date = LocalDateTime.now();
     }
     public static enum TypeMovement {
-        DEPOSIT, WITHDRAWAL, TRANSFER, UNSUPPORTED
+        DEPOSIT, WITHDRAWAL, TRANSFER, UNSUPPORTED, PAY_CREDIT, WITHDRAWAL_DEBIT
     }
 }

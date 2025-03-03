@@ -30,7 +30,9 @@ public class ExceptionHandlers {
             UnsupportedMovementException.class,
             InvalidPayException.class,
             ConsumeNotValidException.class,
-            RuntimeException.class
+            RuntimeException.class,
+            ServiceNotAvailableException.class,
+            BadInformationException.class
     })
     public Mono<ResponseEntity<Map<String, String>>> handleExceptions(RuntimeException exception) {
         HttpStatus status = getStatus(exception);
@@ -52,10 +54,12 @@ public class ExceptionHandlers {
         } else if (exception instanceof LimitMovementsExceeded || exception instanceof InsufficientBalance ||
                 exception instanceof UnsupportedMovementException || exception instanceof InvalidPayException ||
                 exception instanceof ConsumeNotValidException || exception instanceof ClientAlreadyExist ||
-                exception instanceof InconsistentClientException) {
+                exception instanceof InconsistentClientException || exception instanceof BadInformationException ) {
             log.warn(exception.getMessage());
             return HttpStatus.BAD_REQUEST;
-        } else {
+        } else if (exception instanceof ServiceNotAvailableException) {
+            return HttpStatus.SERVICE_UNAVAILABLE;
+        }else {
             log.error(exception.getMessage());
             return HttpStatus.INTERNAL_SERVER_ERROR;
         }

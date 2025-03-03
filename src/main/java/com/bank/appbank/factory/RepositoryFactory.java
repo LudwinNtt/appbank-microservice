@@ -16,13 +16,16 @@ public class RepositoryFactory {
             ClientRepository clientRepository,
             CreditCardRepository creditCardRepository,
             CreditRepository creditRepository,
-            BankAccountRepository bankAccountRepository
+            BankAccountRepository bankAccountRepository,
+            BankAccountDebitCardRepository bankAccountDebitCardRepository,
+            DebitCardRepository debitCardRepository
     ) {
         this.repositoryMap = Map.of(
                 Client.class, clientRepository,
                 CreditCard.class, creditCardRepository,
                 Credit.class, creditRepository,
-                BankAccount.class, bankAccountRepository
+                BankAccount.class, bankAccountRepository,
+                DebitCard.class, debitCardRepository
         );
     }
 
